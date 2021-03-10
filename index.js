@@ -26,6 +26,7 @@ app.post('/', upload.fields([{name: 'audio', maxCount: 1}, {name: 'background', 
         Meyda.bufferSize = BUFFER_SIZE;
         await draw(audioBuffer, context);
         var command = ffmpeg();
+        command.input(audio.destination+audio.filename);
         command.input(draw(audioBuffer, context)).args('-framerate', FPS.toString()).format('image2pipe');
         command.output('frames.webm');
     
