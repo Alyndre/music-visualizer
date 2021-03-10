@@ -23,6 +23,7 @@ app.post('/', upload.fields([{name: 'audio', maxCount: 1}, {name: 'background', 
 
       try {
         var command = ffmpeg();
+        command.input(audio.destination+audio.filename);
         command.input(draw(audioBuffer)).args('-framerate', FPS.toString()).format('image2pipe');
         command.output('frames.webm');
     
